@@ -17,7 +17,10 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## Assignment 7 
-### Steps 
+<details>
+<summary>Steps</summary> 
+
+
 1. Install Flutter using Homebrew
 `brew install flutter`
 
@@ -194,9 +197,13 @@ class ItemCard extends StatelessWidget {
 ```
 
 6. The previous step already included the Snackbar
+</details>
 
 
-### Stateless vs Stateful in Flutter
+<details>
+<summary>Stateless vs Stateful in Flutter</summary>
+
+
 If a widget can change when a user interacts with it, it's stateful. Meanwhile, a stateless widget
 never changes. The examples of stateless widgets are `Icon`, `IconButton`, and `Text`.
 
@@ -204,8 +211,12 @@ One can also say that a stateful widget is dynamic. A notable example would be i
 in response to interactions by user or when the widget receives data
 
 Source : [Click here to access the flutter docs](https://docs.flutter.dev/ui/interactivity#stateful-and-stateless-widgets)
+</details>
 
-### Widgets in my app
+<details>
+<summary>Widgets in my app</summary>
+
+
 In `main.dart`:
 
 1. `MaterialApp`: This is the root widget that configures your app. It provides a basic structure for your app, including the title and theme.
@@ -228,7 +239,7 @@ In `menu.dart`:
 6. `ItemCard`: This is your custom widget that represents each item in the grid. It's built using a colored container with an icon and a label.
 
 These widgets are building blocks that help you create the structure and appearance of your Flutter app. They work together to display your app's content and functionality in an organized manner.
-
+</details>
 
 
 
