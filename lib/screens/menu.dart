@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:rafis_inventory/screens/additem_form.dart';
+// import drawer widget
+import 'package:rafis_inventory/widgets/left_drawer.dart';
+import 'package:rafis_inventory/widgets/shop_card.dart';
 
-class Items {
+class ShopItem {
   final String name;
   final IconData icon;
   final Color color;
-
-  Items(this.name, this.icon, this.color);
+  ShopItem(this.name, this.icon, this.color);
 }
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<Items> items = [
-    Items("View Items", Icons.checklist, Colors.indigo.shade400),
-    Items("Add Item", Icons.add_shopping_cart, Colors.blue.shade400),
-    Items("Logout", Icons.logout, Colors.red.shade400),
+  final List<ShopItem> items = [
+    ShopItem("View Items", Icons.checklist, Colors.indigo.shade400),
+    ShopItem("Add Item", Icons.add_shopping_cart, Colors.blue.shade400),
+    ShopItem("Logout", Icons.logout, Colors.red.shade400),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -33,7 +36,10 @@ class MyHomePage extends StatelessWidget {
         title: const Text(
           'Rafi\'s Inventory',
         ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Scrolling wrapper widget
         child: Padding(
@@ -45,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Text widget to display text with center alignment and appropriate style
                 child: Text(
-                  'My inventory', // Text indicating the shop name
+                  'Your Inventory Page', // Text indicating the shop name
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -62,9 +68,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((Items item) {
+                children: items.map((ShopItem item) {
                   // Iteration for each item
-                  return ItemCard(item);
+                  return ShopCard(item);
                 }).toList(),
               ),
             ],
@@ -75,23 +81,32 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ItemCard extends StatelessWidget {
-  final Items item;
+class ShopCard extends StatelessWidget {
+  final ShopItem item;
 
-  const ItemCard(this.item, {Key? key}); // Constructor
+  const ShopCard(this.item, {Key? key}); // Constructor
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: item.color,
       child: InkWell(
-        // Responsive touch area
+        // Area responsive to touch
         onTap: () {
-          // Show a SnackBar when clicked
+          // Show SnackBar when clicked
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("You pressed the ${item.name} button!")));
+
+          // Navigate to the appropriate route (depending on the button type)
+          if (item.name == "Add Item") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ShopFormPage(),
+                ));
+          }
         },
         child: Container(
           // Container to hold Icon and Text
